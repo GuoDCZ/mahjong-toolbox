@@ -1,36 +1,35 @@
-#include <map>
 #include <vector>
 #include "tile.h"
 
+enum Frag {
+    _shuntsu,
+    _,
+    _
+}
+
 struct HandFrag {
-    std::map<Tile, int> tiles;
-    int n_mentsu;
-    int n_zyantou;
+    int tiles[34];
+    int frags[4];
+    Tile curr_tile;
+    int curr_search;
 };
 
 class BaseSearch {
  public:
     virtual bool exist(const HandFrag &hf) = 0;
     virtual void remove(HandFrag &hf) = 0;
-    virtual bool recheck() = 0;
 };
 
 class SearchSequence: public BaseSearch {
     bool exist(const HandFrag &hf) override;
     void remove(HandFrag &hf) override;
-    bool recheck() override;
 };
 
 class Hand {
-    std::map<Tile, int> tiles;
-    int n_mentsu_target;
-    int n_zyantou_target;
-};
-
-struct Hand {
-    int tiles[30];
-    int nMentsu;
-    int nZyanTou;
+    int tiles[34];
+    int n_frags_target[4];
+    BaseSearch *bs[4];
+    Hand();
 };
 
 bool ifWin(const Hand* hand, int* score, int normal) {
