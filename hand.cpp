@@ -15,3 +15,9 @@ bool SearchSequence::exist(const HandFrag &hf) {
     assert(it->second);
     return ture;
 }
+
+Hand::Hand():
+    tiles({3,1,1,1,2,1,1,1,3,}),
+    n_frags_target({4,1,0,0}) {
+        
+    }
